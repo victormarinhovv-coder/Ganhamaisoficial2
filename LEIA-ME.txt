@@ -1,0 +1,298 @@
+GANHA MAIS - VERSÃO 2.0
+
+Substitua no seu site: index.html e sw.js
+
+A versão 1.0 junta tudo que foi feito até agora:
+- notificações do aviso do admin na barra do celular (sem limite de avisos)
+- contador de online corrigido
+- botão Conta (com Sair dentro) e botões "Início" no topo das telas
+- tela de entrada com imagem grande no topo (pode usar hero.jpg)
+- botão voltar do celular volta para a tela inicial
+- copiar chave Pix na liberação de saques
+- bolinha de suporte nova
+
+REGRA DE VERSÃO
+- Cada atualização sobe a versão: 1.0, 1.1, 1.2, 1.3...
+- A versão aparece em Conta (embaixo, pequenininha) e na Ajuda.
+- No código, é a linha  const VERSAO_APP  no index.html.
+
+
+NOVIDADES DA 1.1
+- EN funciona no app inteiro (troca em Conta > Idioma ou na tela de entrada)
+- "Esqueceu a senha?": código de 6 dígitos por e-mail, nova senha + confirmação
+- Enviar aviso: caixinha "Mensagem importante" (marcada = aparece no meio da tela dentro do app; desmarcada = barra de notificações)
+- "Atualizar app" e "Versão" só aparecem em Conta
+- Telas Convidar, Ajuda e Sacar refeitas, com passo a passo
+
+ATIVAR O "ESQUECEU A SENHA" (1 vez só, grátis até 200 e-mails/mês)
+1) Crie conta em emailjs.com e conecte seu Gmail em Email Services (anote o Service ID)
+2) Em Email Templates, crie um modelo. No campo "To email" use {{to_email}} e no texto use {{codigo}}. Anote o Template ID
+3) Em Account, copie a Public Key
+4) No index.html, procure  const EMAILJS  e troque os três COLE_AQUI por esses valores
+5) No Firebase (Realtime Database > Regras) o caminho  recuperacao  precisa estar liberado para leitura e escrita, como já está o  usuarios
+Obs.: só quem se cadastrou com e-mail consegue recuperar. Quem usou telefone fala com o suporte.
+
+NOVIDADES DA 1.2
+- Mensagem importante: agora aparece no meio da tela, com o texto que você escreveu, inclusive para você que enviou
+- Bolinha de suporte nova (atendente com fone)
+- Cartão "Instalar aplicativo" no lugar dos números da tela inicial. Some depois que instala e os números voltam
+
+NOVIDADES DA 1.3
+- Mensagem importante: o "já vi" agora é por conta. Antes, se você abrisse outra conta no mesmo celular, a mensagem já contava como vista e não aparecia
+
+NOVIDADES DA 1.4
+- Instalar o app: junto vão manifest.json e os ícones (icon-192.png, icon-512.png, icon-maskable-512.png, badge-96.png). SUBA TODOS no Netlify, na mesma pasta do index.html. Sem eles o Chrome diz "Não é possível instalar o app"
+- Se a pessoa fechar a janela de instalar, o cartão mostra o caminho pelo menu (3 pontinhos > Instalar app), que sempre funciona
+- Depois de subir, no celular: Chrome > Conta > Atualizar app. Se já tinha tentado instalar, limpe os dados do site no Chrome (Configurações do site) e abra de novo
+
+NOVIDADES DA 1.5
+- "Esqueceu a senha?" já está ligado ao seu EmailJS (service, template e chave preenchidos). É só subir o index.html e o sw.js
+
+NOVIDADES DA 1.6
+- Bolinha de suporte, "pessoas online" e o menu de 3 pontinhos ficam sempre fixos (não somem mais ao rolar)
+- O app pede a permissão de notificação sozinho, na primeira vez que a pessoa toca na tela depois de entrar. Com o app instalado, aparece a janela do próprio Android
+- "Esqueceu a senha?": se o e-mail falhar, a tela agora mostra o motivo exato
+
+NOVIDADES DA 1.7
+- Ajuda: as perguntas ficaram todas alinhadas (a "Quanto tempo demora a aprovação?" não desce mais)
+- Instalar: se o Chrome não mostrar "Instalar app", o cartão ensina "Adicionar à tela inicial"
+- Arquivo _headers novo: ajuda o Netlify a entregar o manifest.json do jeito certo. Suba junto
+- IMPORTANTE para instalar: o site precisa ter manifest.json, icon-192.png, icon-512.png e icon-maskable-512.png na mesma pasta do index.html
+
+NOVIDADES DA 1.8
+- Sai o botão pequeno "Ativar avisos" da tela inicial (o app já pede a permissão sozinho)
+- "Tarefas feitas / Pontos ganhos / Convidados" foram para a tela Conta (Seu resumo)
+- No lugar deles fica o cartão "Instale o aplicativo", sem botão de dispensar. Some quando o app está instalado
+- Ajuda com botão de suporte e mais perguntas; Sacar com "Dúvidas do saque"
+
+COMO O BOTÃO BAIXAR UM APK DE VERDADE
+O APK não dá para criar dentro deste chat. Faça assim:
+1) Suba todos os arquivos no Netlify e confira que o site abre
+2) No Chrome, abra pwabuilder.com, cole o endereço do site, toque em Start > Package for stores > Android > Generate
+3) Baixe o arquivo .apk, renomeie para GanhaMais.apk e suba no Netlify, junto do index.html
+4) No index.html, perto do fim, troque  const APK_URL = '';  por  const APK_URL = 'GanhaMais.apk';
+5) Suba o index.html de novo. Agora o botão do cartão baixa o APK
+Sem o passo 4, o botão usa a instalação do Chrome.
+
+NOVIDADES DA 1.9
+- Template ID do EmailJS corrigido (o anterior dava "template ID not found")
+
+NOVIDADES DA 1.9.1
+- Cartão "Instale o aplicativo" não some mais por causa de um "já instalei" antigo guardado no navegador. Só some quando o app está instalado
+
+NOVIDADES DA 1.9.2
+- Zoom bloqueado (pinça e toque duplo), sem puxar a tela para recarregar, campos de texto em 16px
+
+NOVIDADES DA 1.10
+- Bolinha de suporte, "online" e os 3 pontinhos somem ao descer a tela e voltam ao subir
+- Toque em "online": mostra quem está online e o perfil básico (nome e membro desde). Não mostra e-mail, telefone nem saldo
+- Animação de subir e descer na bolinha de suporte, nos ícones Sacar/Convidar/Ajuda/Conta, no ícone do Telegram, no cartão de instalar e nos números dos passos
+
+AJUSTES DESTA ENTREGA (versão mostrada no app: 1.1)
+- Cartão de instalar volta a ter o botão "Agora não" (esconde por 7 dias)
+- Passo a passo "Como instalar o app no Google Chrome" na Ajuda e na Conta
+
+- Rolagem: retirei as travas de toque extras (touch-action e touchmove) que podiam atrapalhar a rolagem. O zoom continua bloqueado pelo viewport
+
+- Online: o cartão verde não recebia toques (o CSS antigo bloqueava). Corrigido: agora abre a lista de quem está online
+
+- Bolinha de suporte parada (sem animação)
+- Provas "Aguardando" e saques "Pendente" ganham um ícone girando
+- Administrador: bolinha vermelha pulsando no menu dos 3 pontinhos e contadores em "Aprovar provas" e "Liberar saques" quando há pendências; Painel geral com 4 números novos (novos cadastros hoje, provas aprovadas, provas rejeitadas, saques pedidos hoje)
+
+- Administrador (provas e saques): trava contra toque duplo (não soma nem devolve pontos duas vezes), só trata o que ainda está pendente, "Cancelar" na janela do motivo agora cancela de verdade, nome e foto protegidos, saques pendentes aparecem primeiro, toque na foto da prova abre grande
+
+- Tarefas: um só aviso de status (Em análise com ícone girando / Aprovada / Rejeitada com motivo)
+- Botão FAZER TAREFA: animação mais leve (eu tinha sobrescrito a animação original por engano, agora corrigido)
+- Editor de tarefa: botão "Escolher foto da galeria" (não precisa mais de link)
+
+- Cadastrar tarefa: passo 1 (dados) e passo 2 (detalhes) agora ficam na mesma tela, um embaixo do outro, sincronizados. Ao adicionar uma tarefa, ela já abre no passo 2. Ao editar uma tarefa, o passo 2 carrega junto. A lista "Suas tarefas" fica por último
+
+- Tarefa do Telegram (passo 2 do cadastro): caixinha "Tarefa do Telegram". Marcada, a pessoa precisa escrever nome, @ e telefone do Telegram para enviar o comprovante, vê até 5 fotos de exemplo extras, e você vê os dados do Telegram na tela de aprovar provas
+
+- Tarefa do Telegram: no lugar das fotos extras agora são VÍDEOS de exemplo (até 3, por link: YouTube, Google Drive, Telegram ou .mp4). YouTube, Drive e .mp4 tocam dentro da tarefa; os outros abrem num botão
+
+- Tarefa do Telegram: fotos de exemplo (galeria) E vídeos de exemplo (galeria ou link). Pode usar um, outro ou os dois
+
+COMO ATIVAR O ENVIO DE VÍDEO PELA GALERIA (1 vez só)
+1) Firebase > Storage > Começar (Get started), no projeto ganha-mais-445e8
+2) Em Storage > Regras (Rules), cole isto e publique:
+   rules_version = '2';
+   service firebase.storage {
+     match /b/{bucket}/o {
+       match /videos/{allPaths=**} {
+         allow read: if true;
+         allow write: if request.resource.size < 40 * 1024 * 1024 && request.resource.contentType.matches('video/.*');
+       }
+     }
+   }
+   Como o app não usa o login do Firebase, qualquer pessoa com o código do site poderia enviar vídeo (limite 40 MB). Se isso te preocupar, use só links.
+Sem isso, o botão "Vídeo da galeria" avisa o erro e você pode usar "Colar link".
+
+
+NOVIDADES DA 1.2
+- Versão do app agora mostra 1.2 (Conta e Ajuda)
+- Tarefa do Telegram confirmada: caixinha no passo 2 do cadastro, dados do Telegram (nome, @, telefone) que você vê ao aprovar a prova, até 5 fotos de exemplo e até 3 vídeos de exemplo (galeria ou link)
+- Cache do app renovado (sw.js) para o celular pegar a atualização. Depois de subir: Conta > Atualizar app
+- Suba index.html e sw.js no Netlify
+
+
+NOVIDADES DA 1.3
+- Tarefa do Telegram: o botão "Adicionar foto ou vídeo da galeria" agora abre a galeria com fotos E vídeos. Foto entra nas fotos de exemplo (até 5); vídeo é enviado e entra nos vídeos de exemplo (até 3, um de cada vez, máx. 40 MB)
+- O envio de vídeo pela galeria precisa do Storage ativado no Firebase (passo a passo mais acima, em "COMO ATIVAR O ENVIO DE VÍDEO PELA GALERIA"). Sem isso dá erro; use "Colar link"
+- Depois de enviar o vídeo, toque em SALVAR DETALHES
+- Suba index.html e sw.js no Netlify. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 1.4
+- Editor de tarefa: aviso "Não aparecem minhas fotos ou vídeos?" com o passo a passo para liberar Fotos e vídeos para o Chrome nas configurações do Android (o site não consegue pedir essa permissão sozinho)
+- Suba index.html e sw.js no Netlify. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 1.5
+- Editor de tarefa agora tem 3 partes. Na parte 2 há a caixinha "⭐ Tarefa especial (mostrar a parte 3)". Desmarcada: só as partes 1 e 2, como sempre. Marcada: aparece a parte 3 (mesma cor da parte 2)
+- Parte 3: escolher de qual conta pedir os dados (Telegram ou TikTok), até 15 fotos de exemplo (antes eram 5) e até 3 vídeos de exemplo (galeria ou link)
+- A pessoa escreve nome, @ e telefone da conta dela antes de enviar o comprovante. Você vê isso na tela de aprovar provas, com o nome da rede
+- Lembre de tocar em SALVAR DETALHES depois de mexer na parte 3
+- Cada tarefa especial com 15 fotos pesa uns 400 KB e carrega para todos. Se ficar lento, use menos fotos
+- Suba index.html e sw.js no Netlify. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 1.6
+- Vídeo da galeria: não fica mais "Enviando 0%" para sempre. Se o armazenamento não responder em 20 segundos, o app para e avisa o motivo
+- Texto da parte 3 corrigido (estava repetindo "da conta dela")
+
+IMPORTANTE SOBRE O ENVIO DE VÍDEO PELA GALERIA
+- Desde 3 de fevereiro de 2026 o Firebase só deixa usar o Storage se o projeto estiver no plano Blaze (precisa cadastrar cartão; o uso pequeno continua dentro da cota grátis). No plano Spark o envio trava ou dá erro 402/403
+- Sem o Blaze, use "Colar link": suba o vídeo no YouTube (não listado), no Google Drive (acesso para quem tem o link) ou no Telegram e cole o link. Funciona de graça
+- Fotos de exemplo não usam o Storage e funcionam normalmente
+
+
+NOVIDADES DA 1.7
+- Dados da pessoa (tarefa especial): só o NOME é obrigatório. O @ é opcional. O telefone saiu. Aparece o aviso "Errou o nome? Fale com o suporte". Na tela de aprovar provas você vê o nome (e o @, se ela colocou)
+- Fotos de exemplo: ficam uma embaixo da outra (não rolam para o lado). Tocar numa foto abre em tela cheia: dois dedos ou toque duplo para dar zoom, deslizar para o lado passa para a outra foto, botão ✕ (ou o voltar do celular) fecha. Vale também para a foto de exemplo principal
+- Qualidade das fotos melhor (antes era comprimida demais). Fotos que você já colocou antes continuam com a qualidade antiga: coloque de novo para melhorar
+
+REGRA NOVA NO FIREBASE (recomendado, 1 vez só)
+As fotos de exemplo agora ficam num lugar separado (tarefasExtras), para não pesar a lista de tarefas de todo mundo.
+1) Firebase > Realtime Database > Regras
+2) Ao lado de "tarefas", adicione:   "tarefasExtras": { ".read": true, ".write": true },
+3) Publique
+Sem essa regra tudo continua funcionando, mas as fotos ficam no lugar antigo e deixam o app mais pesado.
+
+
+NOVIDADES DA 1.8
+- Fotos de exemplo da tarefa: agora aparecem pequenininhas, 4 por linha (8 fotos = 4 em cima e 4 embaixo; 7 = 4 e 3). Tocar numa foto abre grande, com zoom e deslizar para passar
+- Qualidade bem melhor: o problema era que as fotos de tela (em pé) eram reduzidas demais. Agora ficam com até 1000 px de largura. Cada foto guarda uma miniatura leve (para a grade) e a versão grande (só baixa quando a pessoa toca)
+- FOTOS JÁ COLOCADAS ANTES CONTINUAM FEIAS: abra a tarefa no editor, apague e coloque de novo
+- A regra tarefasExtras do Firebase (da 1.7) continua valendo e agora é ainda mais importante: sem ela as fotos grandes ficam no lugar antigo e pesam o app de todo mundo
+
+AJUSTES (aprovar/rejeitar e avisos)
+- Aprovar/rejeitar prova e saque: corrigido o caso em que o app dizia "já foi tratada" sem ter sido (a transação abortava quando o dado ainda não estava no celular)
+- Aviso normal na barra do celular: agora espera o app ficar pronto e, se não conseguir mostrar, escreve o motivo na tela
+- IMPORTANTE: aviso com o app FECHADO só chega com push de servidor (VAPID_KEY + função no Firebase). Sem isso, o aviso aparece na barra só enquanto o app está aberto ou em segundo plano
+
+- Painel do admin: "Instalaram o App" e "Notificações Ativas" (quantidade e %). Conta quem abriu o app instalado ou ativou as notificações depois desta atualização. Quem desinstalar continua contando (não dá para detectar)
+- Tela inicial: cartão "Ativar notificações" quando a permissão ainda não foi dada, e "Como liberar" quando está bloqueada
+- Painel: os números de instalação e notificação aparecem só como quantidade (sem porcentagem). Cartões de instalar e de notificação mais compactos
+
+- Convites: o número de Convidados e Ativos agora é conferido com a lista real de quem se cadastrou pelo seu link e corrigido sozinho ao abrir Convidar/Conta (antes o contador podia ficar menor)
+- Lista "ativo" dos convidados agora usa a 1ª tarefa aprovada e mostra o bônus certo (2500 pts)
+- Painel: tocar em Provas Rejeitadas, Instalaram o App ou Notificações Ativas abre a lista com nome, ID e dia/hora
+
+- Administrador: quando alguém envia uma prova ou pede saque, aparece um aviso na tela e na barra de notificações do celular (com o nome e quantas estão aguardando). Os contadores do menu dos 3 pontinhos agora atualizam ao vivo. Só funciona com o app aberto ou em segundo plano
+- Lista de usuários (admin): cada pessoa mostra quem a convidou (ou "Entrou sem convite") e o topo mostra quantos entraram com e sem convite
+
+- Lista de usuários (admin): "Convidou N pessoas" em cada usuário
+- Painel: "Provas Aprovadas" também abre a lista (nome, ID, dia/hora e quem aprovou). As rejeitadas mostram quem rejeitou. Os 4 cartões clicáveis têm a mesma borda dourada. Provas aprovadas/rejeitadas ANTES desta versão aparecem sem o nome do admin
+
+
+NOVIDADES DA 1.9
+- O cartão "CANAL OFICIAL / Entrar" agora abre https://t.me/ganhamaisoficial2
+- Administrador vê o e-mail/contato COMPLETO na lista de convidados (usuário comum continua vendo escondido)
+- Para atualizar: suba index.html e sw.js (os outros arquivos não mudaram). No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 2.0
+- E-mail/contato dos convidados agora aparece COMPLETO para todos (antes ficava escondido, tipo abc***@gmail.com)
+- Atenção: cada usuário vê o contato completo de quem ele convidou
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+NOVIDADES DA 2.1
+- Saques: mostram quem pagou ou rejeitou e quando (as provas já mostravam)
+
+NOVIDADES DA 2.2
+- Bônus por convites: a cada 20 amigos CADASTRADOS com o link da pessoa, ela ganha R$ 5,00 (20 = R$ 5, 40 = mais R$ 5, e assim por diante). Pago uma vez só por meta, quando a pessoa abre o app. Aparece uma barra de progresso na tela Convidar
+- Para mudar os números: no index.html procure  META_CONVITES=20,META_BONUS_REAIS=5
+
+VERSÃO MOSTRADA NO APP: 1.2 (a pedido). Para mudar, procure  const VERSAO_APP  no index.html
+
+NOVIDADES DA 1.3
+- Buscar / pontos: botão "🚫 BANIR CONTA" (e "✅ DESBANIR"). A conta banida é expulsa na hora, não consegue entrar e a pessoa não consegue criar outra com o mesmo e-mail/telefone nem no mesmo aparelho. Não dá para banir o dono, um admin ou a si mesmo
+- Limites: quem troca de e-mail E de celular (ou limpa os dados do navegador) consegue criar outra conta. As regras do Firebase precisam permitir gravar em  bloqueados  e  dispositivosBloqueados  (como já está em  usuarios)
+
+
+NOVIDADES DA 2.3 (app mostra 1.4)
+- Bônus por convites agora é por METAS (cadastros com o link da pessoa): 5 = R$ 0,50 | 10 = R$ 1,00 | 20 = R$ 2,00 | 30 = R$ 3,00 | 40 = R$ 4,00 | 50 = R$ 5,00. Acabou em 50 (não passa disso)
+- Cada meta paga uma vez só, quando a pessoa abre o app (os prêmios de cada meta se somam: chegando em 50, ao todo R$ 15,50)
+- A tela Convidar mostra a barra de progresso e a lista das metas com ✅
+- Para mudar valores: no index.html procure  var METAS=
+- Quem já recebeu o bônus antigo (R$ 5 a cada 20) NÃO perde nada, mas também vai receber as metas novas
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 2.4 (app mostra 1.5)
+- Administrador > Aprovar provas: cada comprovante mostra o NOME DA TAREFA em destaque (faixa dourada "📋 TAREFA: ..."), então dá para saber de qual tarefa é (ex.: Bot do Telegram, outra tarefa...)
+- A foto ganhou o título "📷 COMPROVANTE ENVIADO" e, se não tiver foto, aparece o aviso "⚠️ Sem foto de comprovante"
+- Provas novas já gravam o nome da tarefa; as antigas buscam o nome pela tarefa (se a tarefa foi apagada, aparece "Tarefa removida")
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 2.5 (app mostra 1.6)
+- Painel > Rejeitadas: agora mostra cada prova com o NOME DA TAREFA, a FOTO do comprovante e o botão "✅ APROVAR ESTA TAREFA" (paga os pontos, libera a tarefa como feita e, se for a 1ª aprovada da pessoa, paga o convite uma vez só)
+- Painel > Aprovadas: mesma coisa, com o botão "❌ RECUSAR ESTA TAREFA" (pede o motivo, tira os pontos da pessoa e libera ela para refazer a tarefa)
+- Se a pessoa já sacou, ao recusar o saldo pode ficar negativo. O bônus de convite que o amigo dela já recebeu NÃO é devolvido
+- Editar tarefas: cada tarefa mostra "Pessoas nesta tarefa: total" com Aprovadas / Recusadas / Pendentes, na lista e dentro da edição. Conta por pessoa (se a pessoa foi recusada e depois aprovada, vale a aprovada) e só conta quem ENVIOU comprovante
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 2.6 (app mostra 1.7)
+CONVITES MAIS BARATOS
+- Antes: R$ 2,50 por amigo ativo + metas. Agora: R$ 0,50 por amigo ATIVO (amigo que teve a 1ª tarefa aprovada por você) + metas
+- As metas agora contam AMIGOS ATIVOS, não cadastros: 5 = R$ 0,50 | 10 = R$ 1 | 20 = R$ 2 | 30 = R$ 3 | 40 = R$ 4 | 50 = R$ 5 (para em 50)
+- Só cadastrar (ou criar conta falsa) não paga nada: o amigo precisa fazer tarefa e você aprovar
+- Custo por amigo ativo caiu de ~R$ 2,50+ para ~R$ 0,81 (R$ 0,50 + R$ 15,50/50 das metas)
+- Para mudar: P_CONVITE_ATIVO (em pontos, 1000 = R$ 1) e var METAS= no index.html
+
+NOTIFICAÇÕES
+- Avisos do admin agora aparecem DENTRO do app (cartão dourado no topo) para quem não ativou as notificações do celular, ou se a barra do celular falhar. Quem ativou continua recebendo na barra
+- Mensagens de saque ("Mar*** solicitou saque de R$ 10" / "recebeu R$ 10 · pago ✅"): agora usam um nó novo do Firebase chamado feedSaques (só 3 letras do nome + valor). Qualquer pessoa que entra vê os últimos e os novos aparecem ao vivo, um de cada vez
+- IMPORTANTE: no Firebase > Realtime Database > Regras, o nó feedSaques precisa permitir leitura e escrita, por exemplo:
+    "feedSaques": { ".read": true, ".write": true }
+  (coloque dentro de "rules", ao lado de "saques"). Sem isso as mensagens de saque continuam sem aparecer
+- Notificação com o app FECHADO continua precisando da chave VAPID e de um envio pelo servidor (Cloud Function). Só o site não consegue
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 2.7 (app mostra 1.8)
+- Amigo ATIVO agora = amigo com 2 TAREFAS APROVADAS (antes 1). O bônus de R$ 0,50 por amigo ativo cai quando o amigo tem a 2ª tarefa aprovada, uma vez só por amigo
+- Metas de 5 em 5 amigos ativos, +R$ 0,25 cada, até 50: 5=0,25 | 10=0,50 | 15=0,75 | 20=1,00 | 25=1,25 | 30=1,50 | 35=1,75 | 40=2,00 | 45=2,25 | 50=2,50. Total das metas: R$ 13,75. Para mudar: var METAS= no index.html
+- SAQUE: só libera com pelo menos 2 tarefas aprovadas (aviso mostra quantas a pessoa tem). Essa trava é feita pelo app; as regras do Firebase não conferem isso
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 2.8 (app mostra 1.9)
+- Mensagens de saque no topo: cada uma aparece UMA vez por celular (some em 4s e não volta); ao entrar mostra no máximo as 2 mais novas (até 6h); o dono não vê as próprias mensagens (só a faixa vermelha de saque novo, que some em 4s)
+- Pede para a pessoa ativar as notificações (1x por dia, até ela ativar ou ter bloqueado)
+- Cada pessoa que abre o app grava uma "entrada" (no máx. 1 a cada 30 min) para o servidor avisar o dono
+- NOTIFICAÇÃO COM O APP FECHADO (nova tarefa, alguém entrou, novo cadastro) precisa do servidor: veja a pasta/zip "servidor-notificacoes" e o passo a passo dentro dele
+- Para atualizar: suba index.html e sw.js. No celular: Conta > Atualizar app
+
+
+NOVIDADES DA 4.0 (app mostra 2.2) — MAIS RÁPIDO + CADASTRO QUE NÃO TRAVA
+- Login e cadastro não baixam mais a lista de todos os usuários (era o que deixava lento e travava com muita gente). Agora é uma consulta pequena pelo campo contatoN
+- O DONO precisa abrir o app UMA vez logado: ele cria o índice de todos os contatos sozinho e mostra "✅ Índice de contatos pronto"
+- Convites (contagem e lista) agora consultam só os convidados da pessoa
+- Contador de online: consulta só quem deu sinal nos últimos 30s, a cada 15-30s (antes cada celular ouvia o banco inteiro ao vivo)
+- DONO: aviso de "🎉 Novo cadastro" e "👋 Alguém entrou" (além de prova e saque, que já existiam). Funciona com o app aberto/ativo no celular do dono e com as notificações ativadas. Com o app FECHADO precisa do servidor (servidor-notificacoes)
+- REGRAS NOVAS NO FIREBASE (obrigatório para ficar rápido): veja o bloco no chat
